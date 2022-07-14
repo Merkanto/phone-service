@@ -10,6 +10,10 @@ import java.math.BigDecimal;
 @Component
 public class PhoneLoader implements CommandLineRunner {
 
+    public static final String PHONE_1_IMEI = "338694371652036";
+    public static final String PHONE_2_IMEI = "334015010517204";
+    public static final String PHONE_3_IMEI = "863571738204276";
+
     private final PhoneRepository phoneRepository;
 
     public PhoneLoader(PhoneRepository phoneRepository) {
@@ -29,7 +33,7 @@ public class PhoneLoader implements CommandLineRunner {
                     .phoneStyle("Fold")
                     .quantityToCreate(200)
                     .minOnHand(12)
-                    .imei(510101822091988L)
+                    .imei(PHONE_1_IMEI)
                     .price(new BigDecimal("1950"))
                     .build());
 
@@ -38,7 +42,16 @@ public class PhoneLoader implements CommandLineRunner {
                     .phoneStyle("Flip")
                     .quantityToCreate(200)
                     .minOnHand(12)
-                    .imei(510101822091111L)
+                    .imei(PHONE_2_IMEI)
+                    .price(new BigDecimal("1870"))
+                    .build());
+
+            phoneRepository.save(Phone.builder()
+                    .phoneName("iPhone 13")
+                    .phoneStyle("MONOBLOCK")
+                    .quantityToCreate(200)
+                    .minOnHand(12)
+                    .imei(PHONE_3_IMEI)
                     .price(new BigDecimal("1870"))
                     .build());
         }

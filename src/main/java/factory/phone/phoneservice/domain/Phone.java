@@ -37,7 +37,7 @@ public class Phone {
     private String phoneStyle;
 
     @Column(unique = true)
-    private Long imei;
+    private String imei;
     private BigDecimal price;
 
     private Integer minOnHand;

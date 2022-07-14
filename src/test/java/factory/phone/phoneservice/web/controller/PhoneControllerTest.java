@@ -1,17 +1,22 @@
 package factory.phone.phoneservice.web.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import factory.phone.phoneservice.bootstrap.PhoneLoader;
+import factory.phone.phoneservice.services.PhoneService;
 import factory.phone.phoneservice.web.model.PhoneDto;
 import factory.phone.phoneservice.web.model.PhoneStyleEnum;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -24,8 +29,13 @@ class PhoneControllerTest {
     @Autowired
     ObjectMapper objectMapper;
 
+    @MockBean
+    PhoneService phoneService;
+
     @Test
     void getPhoneById() throws Exception {
+
+        given(phoneService.getById(any())).willReturn(getValidPhoneDto());
 
         mockMvc.perform(get("/api/v1/phone/" + UUID.randomUUID().toString()).accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
@@ -38,6 +48,8 @@ class PhoneControllerTest {
         PhoneDto phoneDto = getValidPhoneDto();
         String phoneDtoJson = objectMapper.writeValueAsString(phoneDto);
 
+        given(phoneService.getById(any())).willReturn(getValidPhoneDto());
+
         mockMvc.perform(post("/api/v1/phone/")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(phoneDtoJson))
@@ -46,6 +58,8 @@ class PhoneControllerTest {
 
     @Test
     void updatePhoneById() throws Exception {
+        given(phoneService.getById(any())).willReturn(getValidPhoneDto());
+
         PhoneDto phoneDto = getValidPhoneDto();
         String phoneDtoJson = objectMapper.writeValueAsString(phoneDto);
 
@@ -60,7 +74,7 @@ class PhoneControllerTest {
                 .phoneName("My Phone")
                 .phoneStyle(PhoneStyleEnum.Monoblock)
                 .price(new BigDecimal("9.99"))
-                .imei(991753880596726L)
+                .imei(PhoneLoader.PHONE_1_IMEI)
                 .build();
     }
 }

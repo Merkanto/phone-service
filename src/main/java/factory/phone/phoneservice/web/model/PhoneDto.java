@@ -40,9 +40,8 @@ public class PhoneDto {
     @NotNull
     private PhoneStyleEnum phoneStyle;
 
-    @Positive
     @NotNull
-    private Long imei;
+    private String imei;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     @Positive

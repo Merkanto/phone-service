@@ -3,6 +3,7 @@ package factory.phone.phoneservice.web.controller;
 import factory.phone.phoneservice.web.model.PhoneDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -18,13 +19,13 @@ public class PhoneController {
     }
 
     @PostMapping
-    public ResponseEntity saveNewPhone(@RequestBody PhoneDto phoneDto) {
+    public ResponseEntity saveNewPhone(@RequestBody @Validated PhoneDto phoneDto) {
 
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
     @PutMapping("/{phoneId}")
-    public ResponseEntity updatePhoneById(@PathVariable("phoneId") UUID phoneId, @RequestBody PhoneDto phoneDto) {
+    public ResponseEntity updatePhoneById(@PathVariable("phoneId") UUID phoneId, @RequestBody @Validated PhoneDto phoneDto) {
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 }

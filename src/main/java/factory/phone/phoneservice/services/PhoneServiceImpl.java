@@ -8,6 +8,7 @@ import factory.phone.phoneservice.web.model.PhoneDto;
 import factory.phone.phoneservice.web.model.PhonePagedList;
 import factory.phone.phoneservice.web.model.PhoneStyleEnum;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,7 @@ public class PhoneServiceImpl implements PhoneService {
     private final PhoneRepository phoneRepository;
     private final PhoneMapper phoneMapper;
 
+    @Cacheable(cacheNames = "phoneListCache", condition = "#showInventoryOnHand == false ")
     @Override
     public PhonePagedList listPhones(String phoneName, PhoneStyleEnum phoneStyle, PageRequest pageRequest, Boolean showInventoryOnHand) {
 
@@ -67,6 +69,7 @@ public class PhoneServiceImpl implements PhoneService {
         return phonePagedList;
     }
 
+    @Cacheable(cacheNames = "phoneCache", key = "#phoneId", condition = "#showInventoryOnHand == false ")
     @Override
     public PhoneDto getById(UUID phoneId, Boolean showInventoryOnHand) {
         if (showInventoryOnHand) {

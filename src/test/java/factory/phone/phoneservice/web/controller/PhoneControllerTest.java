@@ -16,6 +16,7 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -35,7 +36,7 @@ class PhoneControllerTest {
     @Test
     void getPhoneById() throws Exception {
 
-        given(phoneService.getById(any())).willReturn(getValidPhoneDto());
+        given(phoneService.getById(any(), anyBoolean())).willReturn(getValidPhoneDto());
 
         mockMvc.perform(get("/api/v1/phone/" + UUID.randomUUID().toString()).accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
@@ -48,7 +49,7 @@ class PhoneControllerTest {
         PhoneDto phoneDto = getValidPhoneDto();
         String phoneDtoJson = objectMapper.writeValueAsString(phoneDto);
 
-        given(phoneService.getById(any())).willReturn(getValidPhoneDto());
+        given(phoneService.saveNewPhone(any())).willReturn(getValidPhoneDto());
 
         mockMvc.perform(post("/api/v1/phone/")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -58,7 +59,7 @@ class PhoneControllerTest {
 
     @Test
     void updatePhoneById() throws Exception {
-        given(phoneService.getById(any())).willReturn(getValidPhoneDto());
+        given(phoneService.updatePhone(any(), any())).willReturn(getValidPhoneDto());
 
         PhoneDto phoneDto = getValidPhoneDto();
         String phoneDtoJson = objectMapper.writeValueAsString(phoneDto);
@@ -72,7 +73,7 @@ class PhoneControllerTest {
     PhoneDto getValidPhoneDto() {
         return PhoneDto.builder()
                 .phoneName("My Phone")
-                .phoneStyle(PhoneStyleEnum.Monoblock)
+                .phoneStyle(PhoneStyleEnum.MONOBLOCK)
                 .price(new BigDecimal("9.99"))
                 .imei(PhoneLoader.PHONE_1_IMEI)
                 .build();

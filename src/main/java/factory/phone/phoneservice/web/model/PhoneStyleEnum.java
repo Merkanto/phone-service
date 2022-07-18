@@ -2,5 +2,5 @@ package factory.phone.phoneservice.web.model;
 
 public enum PhoneStyleEnum {
 
-    FLIP, FOLD, Monoblock
+    FLIP, FOLD, MONOBLOCK
 }

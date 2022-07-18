@@ -5,10 +5,16 @@ import factory.phone.phoneservice.repositories.PhoneRepository;
 import factory.phone.phoneservice.web.controller.NotFoundException;
 import factory.phone.phoneservice.web.mappers.PhoneMapper;
 import factory.phone.phoneservice.web.model.PhoneDto;
+import factory.phone.phoneservice.web.model.PhonePagedList;
+import factory.phone.phoneservice.web.model.PhoneStyleEnum;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -18,8 +24,60 @@ public class PhoneServiceImpl implements PhoneService {
     private final PhoneMapper phoneMapper;
 
     @Override
-    public PhoneDto getById(UUID phoneId) {
-        return phoneMapper.phoneToPhoneDto(phoneRepository.findById(phoneId).orElseThrow(NotFoundException::new));
+    public PhonePagedList listPhones(String phoneName, PhoneStyleEnum phoneStyle, PageRequest pageRequest, Boolean showInventoryOnHand) {
+
+        PhonePagedList phonePagedList;
+        Page<Phone> phonePage;
+
+        if (!StringUtils.isEmpty(phoneName) && !StringUtils.isEmpty(phoneStyle)) {
+            //search both
+            phonePage = phoneRepository.findAllByPhoneNameAndPhoneStyle(phoneName, phoneStyle, pageRequest);
+        } else if (!StringUtils.isEmpty(phoneName) && StringUtils.isEmpty(phoneStyle)) {
+            //search phone_service name
+            phonePage = phoneRepository.findAllByPhoneName(phoneName, pageRequest);
+        } else if (StringUtils.isEmpty(phoneName) && !StringUtils.isEmpty(phoneStyle)) {
+            //search phone_service style
+            phonePage = phoneRepository.findAllByPhoneStyle(phoneStyle, pageRequest);
+        } else {
+            phonePage = phoneRepository.findAll(pageRequest);
+        }
+
+        if (showInventoryOnHand){
+            phonePagedList = new PhonePagedList(phonePage
+                    .getContent()
+                    .stream()
+                    .map(phoneMapper::phoneToPhoneDtoWithInventory)
+                    .collect(Collectors.toList()),
+                    PageRequest
+                            .of(phonePage.getPageable().getPageNumber(),
+                                    phonePage.getPageable().getPageSize()),
+                    phonePage.getTotalElements());
+        } else {
+            phonePagedList = new PhonePagedList(phonePage
+                    .getContent()
+                    .stream()
+                    .map(phoneMapper::phoneToPhoneDto)
+                    .collect(Collectors.toList()),
+                    PageRequest
+                            .of(phonePage.getPageable().getPageNumber(),
+                                    phonePage.getPageable().getPageSize()),
+                    phonePage.getTotalElements());
+        }
+
+        return phonePagedList;
+    }
+
+    @Override
+    public PhoneDto getById(UUID phoneId, Boolean showInventoryOnHand) {
+        if (showInventoryOnHand) {
+            return phoneMapper.phoneToPhoneDtoWithInventory(
+                    phoneRepository.findById(phoneId).orElseThrow(NotFoundException::new)
+            );
+        } else {
+            return phoneMapper.phoneToPhoneDto(
+                    phoneRepository.findById(phoneId).orElseThrow(NotFoundException::new)
+            );
+        }
     }
 
     @Override

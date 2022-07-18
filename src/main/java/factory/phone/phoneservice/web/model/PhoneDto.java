@@ -20,6 +20,8 @@ import java.util.UUID;
 @Builder
 public class PhoneDto {
 
+    static final long serialVersionUID = -5815566940065181210L;
+
     @Null
     private UUID id;
 

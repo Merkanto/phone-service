@@ -34,7 +34,7 @@ public class PhoneLoader implements CommandLineRunner {
 
             phoneRepository.save(Phone.builder()
                     .phoneName("Samsung Galaxy Z")
-                    .phoneStyle("Fold")
+                    .phoneStyle("FOLD")
                     .quantityToCreate(200)
                     .minOnHand(12)
                     .imei(PHONE_1_IMEI)
@@ -43,7 +43,7 @@ public class PhoneLoader implements CommandLineRunner {
 
             phoneRepository.save(Phone.builder()
                     .phoneName("Huawei Pro 100")
-                    .phoneStyle("Flip")
+                    .phoneStyle("FLIP")
                     .quantityToCreate(200)
                     .minOnHand(12)
                     .imei(PHONE_2_IMEI)

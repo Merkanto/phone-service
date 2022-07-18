@@ -99,4 +99,10 @@ public class PhoneServiceImpl implements PhoneService {
 
         return phoneMapper.phoneToPhoneDto(phoneRepository.save(phone));
     }
+
+    @Cacheable(cacheNames = "phoneImeiCache")
+    @Override
+    public PhoneDto getByImei(String imei) {
+        return phoneMapper.phoneToPhoneDto(phoneRepository.findByImei(imei));
+    }
 }

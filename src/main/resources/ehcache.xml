@@ -6,7 +6,7 @@
     </service>
 
     <cache alias="phoneCache" uses-template="config-cache"/>
-    <cache alias="phoneUpcCache" uses-template="config-cache"/>
+    <cache alias="phoneImeiCache" uses-template="config-cache"/>
     <cache alias="phoneListCache" uses-template="config-cache"/>
 
     <cache-template name="config-cache">

@@ -16,4 +16,6 @@ public interface PhoneService {
     PhoneDto saveNewPhone(PhoneDto phoneDto);
 
     PhoneDto updatePhone(UUID phoneId, PhoneDto phoneDto);
+
+    PhoneDto getByImei(String imei);
 }

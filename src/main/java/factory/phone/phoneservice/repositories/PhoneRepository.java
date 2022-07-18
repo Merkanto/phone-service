@@ -14,4 +14,6 @@ public interface PhoneRepository extends PagingAndSortingRepository<Phone, UUID>
     Page<Phone> findAllByPhoneStyle(PhoneStyleEnum phoneStyle, Pageable pageable);
 
     Page<Phone> findAllByPhoneNameAndPhoneStyle(String phoneName, PhoneStyleEnum phoneStyle, Pageable pageable);
+
+    Phone findByImei(String imei);
 }

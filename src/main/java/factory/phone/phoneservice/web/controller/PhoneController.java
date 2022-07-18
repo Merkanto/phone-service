@@ -49,12 +49,18 @@ public class PhoneController {
 
     @GetMapping("phone/{phoneId}")
     public ResponseEntity<PhoneDto> getPhoneById(@PathVariable("phoneId") UUID phoneId,
-                                               @RequestParam(value = "showInventoryOnHand", required = false) Boolean showInventoryOnHand){
+                                                 @RequestParam(value = "showInventoryOnHand", required = false) Boolean showInventoryOnHand){
         if (showInventoryOnHand == null) {
             showInventoryOnHand = false;
         }
 
         return new ResponseEntity<>(phoneService.getById(phoneId, showInventoryOnHand), HttpStatus.OK);
+    }
+
+    @GetMapping("phoneImei/{imei}")
+    public ResponseEntity<PhoneDto> getPhoneByImei(@PathVariable("imei") String imei){
+
+        return new ResponseEntity<>(phoneService.getByImei(imei), HttpStatus.OK);
     }
 
     @PostMapping(path = "phone")

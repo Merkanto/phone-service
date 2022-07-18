@@ -22,9 +22,7 @@ public abstract class PhoneMapperDecorator implements PhoneMapper {
 
     @Override
     public PhoneDto phoneToPhoneDto(Phone phone) {
-        PhoneDto dto = mapper.phoneToPhoneDto(phone);
-        dto.setQuantityOnHand(phoneInventoryService.getOnhandInventory(phone.getId()));
-        return dto;
+        return mapper.phoneToPhoneDto(phone);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package factory.phone.phoneservice.services;
+package factory.phone.phoneservice.services.creatingphone;
 
 import factory.phone.phoneservice.config.JmsConfig;
 import factory.phone.phoneservice.domain.Phone;

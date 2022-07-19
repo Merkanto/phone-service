@@ -1,4 +1,4 @@
-package factory.phone.phoneservice.events;
+package phoneinventoryservice.common.events;
 
 import factory.phone.phoneservice.web.model.PhoneDto;
 import lombok.NoArgsConstructor;

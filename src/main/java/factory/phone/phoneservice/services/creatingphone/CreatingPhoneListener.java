@@ -2,8 +2,8 @@ package factory.phone.phoneservice.services.creatingphone;
 
 import factory.phone.phoneservice.config.JmsConfig;
 import factory.phone.phoneservice.domain.Phone;
-import factory.phone.phoneservice.events.CreatingPhoneEvent;
-import factory.phone.phoneservice.events.NewInventoryEvent;
+import phoneinventoryservice.common.events.CreatingPhoneEvent;
+import phoneinventoryservice.common.events.NewInventoryEvent;
 import factory.phone.phoneservice.repositories.PhoneRepository;
 import factory.phone.phoneservice.web.model.PhoneDto;
 import lombok.RequiredArgsConstructor;

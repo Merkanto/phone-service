@@ -21,7 +21,7 @@ class PhoneInventoryServiceRestTemplateImplTest {
 
     @Test
     void getOnhandInventory() {
-        Integer qoh = phoneInventoryService.getOnhandInventory(PhoneLoader.PHONE_1_UUID);
-        System.out.println(qoh);
+//        Integer qoh = phoneInventoryService.getOnhandInventory(PhoneLoader.PHONE_1_UUID);
+//        System.out.println(qoh);
     }
 }

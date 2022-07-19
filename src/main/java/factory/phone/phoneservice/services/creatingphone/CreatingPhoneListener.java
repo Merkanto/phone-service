@@ -11,8 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -22,17 +21,18 @@ public class CreatingPhoneListener {
     private final PhoneRepository phoneRepository;
     private final JmsTemplate jmsTemplate;
 
+    @Transactional
     @JmsListener(destination = JmsConfig.CREATING_PHONE_REQUEST_QUEUE)
     public void listen(CreatingPhoneEvent event) {
         PhoneDto phoneDto = event.getPhoneDto();
 
-        Optional<Phone> phone = phoneRepository.findById(phoneDto.getId());
+        Phone phone = phoneRepository.getOne(phoneDto.getId());
 
-        phoneDto.setQuantityOnHand(phone.get().getQuantityToCreate());
+        phoneDto.setQuantityOnHand(phone.getQuantityToCreate());
 
         NewInventoryEvent newInventoryEvent = new NewInventoryEvent(phoneDto);
 
-        log.debug("Created phone: " + phone.get().getMinOnHand() + " : QOH: " + phoneDto.getQuantityOnHand());
+        log.debug("Creating beer " + phone.getMinOnHand() + " : QOH: " + phoneDto.getQuantityOnHand());
 
         jmsTemplate.convertAndSend(JmsConfig.NEW_INVENTORY_QUEUE, newInventoryEvent);
     }

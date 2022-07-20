@@ -2,10 +2,10 @@ package factory.phone.phoneservice.services.creatingphone;
 
 import factory.phone.phoneservice.config.JmsConfig;
 import factory.phone.phoneservice.domain.Phone;
-import phoneinventoryservice.common.events.CreatingPhoneEvent;
-import phoneinventoryservice.common.events.NewInventoryEvent;
+import phoneinventoryservice.model.events.CreatingPhoneEvent;
+import phoneinventoryservice.model.events.NewInventoryEvent;
 import factory.phone.phoneservice.repositories.PhoneRepository;
-import factory.phone.phoneservice.web.model.PhoneDto;
+import phoneinventoryservice.model.PhoneDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.annotation.JmsListener;

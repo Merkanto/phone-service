@@ -1,7 +1,7 @@
 package factory.phone.phoneservice.web.mappers;
 
 import factory.phone.phoneservice.domain.Phone;
-import factory.phone.phoneservice.web.model.PhoneDto;
+import phoneinventoryservice.model.PhoneDto;
 import org.mapstruct.DecoratedWith;
 import org.mapstruct.Mapper;
 

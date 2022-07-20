@@ -1,4 +1,4 @@
-package factory.phone.phoneservice.web.model;
+package phoneinventoryservice.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;

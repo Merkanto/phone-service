@@ -2,7 +2,7 @@ package factory.phone.phoneservice.services.creatingphone;
 
 import factory.phone.phoneservice.config.JmsConfig;
 import factory.phone.phoneservice.domain.Phone;
-import phoneinventoryservice.common.events.CreatingPhoneEvent;
+import phoneinventoryservice.model.events.CreatingPhoneEvent;
 import factory.phone.phoneservice.repositories.PhoneRepository;
 import factory.phone.phoneservice.services.inventory.PhoneInventoryService;
 import factory.phone.phoneservice.web.mappers.PhoneMapper;

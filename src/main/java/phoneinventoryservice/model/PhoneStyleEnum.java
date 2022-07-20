@@ -1,4 +1,4 @@
-package factory.phone.phoneservice.web.model;
+package phoneinventoryservice.model;
 
 public enum PhoneStyleEnum {
 

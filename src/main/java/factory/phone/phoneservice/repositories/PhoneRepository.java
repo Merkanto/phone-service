@@ -1,7 +1,7 @@
 package factory.phone.phoneservice.repositories;
 
 import factory.phone.phoneservice.domain.Phone;
-import factory.phone.phoneservice.web.model.PhoneStyleEnum;
+import phoneinventoryservice.model.PhoneStyleEnum;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

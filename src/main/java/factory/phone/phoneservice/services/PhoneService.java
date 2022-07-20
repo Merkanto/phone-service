@@ -1,8 +1,8 @@
 package factory.phone.phoneservice.services;
 
-import factory.phone.phoneservice.web.model.PhoneDto;
-import factory.phone.phoneservice.web.model.PhonePagedList;
-import factory.phone.phoneservice.web.model.PhoneStyleEnum;
+import phoneinventoryservice.model.PhoneDto;
+import phoneinventoryservice.model.PhonePagedList;
+import phoneinventoryservice.model.PhoneStyleEnum;
 import org.springframework.data.domain.PageRequest;
 
 import java.util.UUID;

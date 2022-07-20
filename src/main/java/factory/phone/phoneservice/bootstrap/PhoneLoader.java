@@ -2,7 +2,7 @@ package factory.phone.phoneservice.bootstrap;
 
 import factory.phone.phoneservice.domain.Phone;
 import factory.phone.phoneservice.repositories.PhoneRepository;
-import factory.phone.phoneservice.web.model.PhoneStyleEnum;
+import phoneinventoryservice.model.PhoneStyleEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;

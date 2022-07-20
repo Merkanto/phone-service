@@ -2,7 +2,7 @@ package factory.phone.phoneservice.web.mappers;
 
 import factory.phone.phoneservice.domain.Phone;
 import factory.phone.phoneservice.services.inventory.PhoneInventoryService;
-import factory.phone.phoneservice.web.model.PhoneDto;
+import phoneinventoryservice.model.PhoneDto;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class PhoneMapperDecorator implements PhoneMapper {

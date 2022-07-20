@@ -1,9 +1,9 @@
 package factory.phone.phoneservice.web.controller;
 
 import factory.phone.phoneservice.services.PhoneService;
-import factory.phone.phoneservice.web.model.PhoneDto;
-import factory.phone.phoneservice.web.model.PhonePagedList;
-import factory.phone.phoneservice.web.model.PhoneStyleEnum;
+import phoneinventoryservice.model.PhoneDto;
+import phoneinventoryservice.model.PhonePagedList;
+import phoneinventoryservice.model.PhoneStyleEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;

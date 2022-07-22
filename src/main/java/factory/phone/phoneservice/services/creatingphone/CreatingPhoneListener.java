@@ -32,7 +32,7 @@ public class CreatingPhoneListener {
 
         NewInventoryEvent newInventoryEvent = new NewInventoryEvent(phoneDto);
 
-        log.debug("Creating beer " + phone.getMinOnHand() + " : QOH: " + phoneDto.getQuantityOnHand());
+        log.debug("Creating phone " + phone.getMinOnHand() + " : QOH: " + phoneDto.getQuantityOnHand());
 
         jmsTemplate.convertAndSend(JmsConfig.NEW_INVENTORY_QUEUE, newInventoryEvent);
     }

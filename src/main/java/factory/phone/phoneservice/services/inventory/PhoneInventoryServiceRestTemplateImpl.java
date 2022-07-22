@@ -2,6 +2,7 @@ package factory.phone.phoneservice.services.inventory;
 
 import factory.phone.phoneservice.services.inventory.model.PhoneInventoryDto;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Profile;
@@ -30,8 +31,12 @@ public class PhoneInventoryServiceRestTemplateImpl implements PhoneInventoryServ
         this.phoneInventoryServiceHost = phoneInventoryServiceHost;
     }
 
-    public PhoneInventoryServiceRestTemplateImpl(RestTemplateBuilder restTemplateBuilder) {
-        this.restTemplate = restTemplateBuilder.build();
+    public PhoneInventoryServiceRestTemplateImpl(RestTemplateBuilder restTemplateBuilder,
+                                                 @Value("${phoneinventoryservice.inventory-user}") String inventoryUser,
+                                                 @Value("${phoneinventoryservice.inventory-password}") String inventoryPassword) {
+        this.restTemplate = restTemplateBuilder
+                .basicAuthentication(inventoryUser, inventoryPassword)
+                .build();
     }
 
     @Override
